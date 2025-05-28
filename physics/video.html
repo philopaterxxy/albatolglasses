@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Image Slideshow</title>
+    <style>
+        /* General Styles */
+        :root {
+            --background-color: #f4f4f9;
+            --table-background: #ffffff;
+            --text-color: #333;
+            --button-color: #4CAF50;
+            --button-hover-color: #45a049;
+            --alert-color: red;
+        }
+  
+        [data-theme="dark"] {
+            --background-color: #1e1e2f;
+            --table-background: #2b2b3b;
+            --text-color: #000000;
+            --button-color: #6e8efb;
+            --button-hover-color: #575fcf;
+            --alert-color: #ff4d4d;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+          position: fixed;
+          top: 10px;
+          left: 2;
+          width: 96%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 30px 20px;
+          background: linear-gradient(135deg, #3f433f, #525552);
+          color: white;
+          box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+          border-radius: 15px;
+          transition: all 0.3s ease;
+          z-index: 1000; 
+      }
+      
+        
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 12px 18px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        header nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        header nav a:active {
+            transform: translateY(1px);
+        }
+        
+        header .button-container button {
+            padding: 1.2em 2.5em;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            color: #fff;
+            background-color: #6e8efb;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        header .button-container button:hover {
+            background-color: #5c7ce1;
+            box-shadow: 0px 15px 20px rgba(106, 126, 232, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+        
+        header .button-container button:active {
+            transform: translateY(-1px);
+        }
+        
+
+        .welcome {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 24px;
+        }
+
+        .content {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+          }
+          
+          .switch #input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #2196f3;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            z-index: 0;
+            overflow: hidden;
+          }
+          
+          .sun-moon {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: yellow;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+          }
+          
+          #input:checked + .slider {
+            background-color: black;
+          }
+          
+          #input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+          }
+          
+          #input:checked + .slider .sun-moon {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+            background-color: white;
+            -webkit-animation: rotate-center 0.6s ease-in-out both;
+            animation: rotate-center 0.6s ease-in-out both;
+          }
+          
+          .moon-dot {
+            opacity: 0;
+            transition: 0.4s;
+            fill: gray;
+          }
+          
+          #input:checked + .slider .sun-moon .moon-dot {
+            opacity: 1;
+          }
+          
+          .slider.round {
+            border-radius: 34px;
+          }
+          
+          .slider.round .sun-moon {
+            border-radius: 50%;
+          }
+          
+          #moon-dot-1 {
+            left: 10px;
+            top: 3px;
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            z-index: 4;
+          }
+          
+          #moon-dot-2 {
+            left: 2px;
+            top: 10px;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            z-index: 4;
+          }
+          
+          #moon-dot-3 {
+            left: 16px;
+            top: 18px;
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            z-index: 4;
+          }
+          
+          #light-ray-1 {
+            left: -8px;
+            top: -8px;
+            position: absolute;
+            width: 43px;
+            height: 43px;
+            z-index: -1;
+            fill: white;
+            opacity: 10%;
+          }
+          
+          #light-ray-2 {
+            left: -50%;
+            top: -50%;
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            z-index: -1;
+            fill: white;
+            opacity: 10%;
+          }
+          
+          #light-ray-3 {
+            left: -18px;
+            top: -18px;
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: -1;
+            fill: white;
+            opacity: 10%;
+          }
+          
+          .cloud-light {
+            position: absolute;
+            fill: #eee;
+            animation-name: cloud-move;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+          }
+          
+          .cloud-dark {
+            position: absolute;
+            fill: #ccc;
+            animation-name: cloud-move;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+          }
+          
+          #cloud-1 {
+            left: 30px;
+            top: 15px;
+            width: 40px;
+          }
+          
+          #cloud-2 {
+            left: 44px;
+            top: 10px;
+            width: 20px;
+          }
+          
+          #cloud-3 {
+            left: 18px;
+            top: 24px;
+            width: 30px;
+          }
+          
+          #cloud-4 {
+            left: 36px;
+            top: 18px;
+            width: 40px;
+          }
+          
+          #cloud-5 {
+            left: 48px;
+            top: 14px;
+            width: 20px;
+          }
+          
+          #cloud-6 {
+            left: 22px;
+            top: 26px;
+            width: 30px;
+          }
+          
+          @keyframes cloud-move {
+            0% {
+              transform: translateX(0px);
+            }
+          
+            40% {
+              transform: translateX(4px);
+            }
+          
+            80% {
+              transform: translateX(-4px);
+            }
+          
+            100% {
+              transform: translateX(0px);
+            }
+          }
+          
+          .stars {
+            transform: translateY(-32px);
+            opacity: 0;
+            transition: 0.4s;
+          }
+          
+          .star {
+            fill: white;
+            position: absolute;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            animation-name: star-twinkle;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+          }
+          
+          #input:checked + .slider .stars {
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 1;
+          }
+          
+          #star-1 {
+            width: 20px;
+            top: 2px;
+            left: 3px;
+            animation-delay: 0.3s;
+          }
+          
+          #star-2 {
+            width: 6px;
+            top: 16px;
+            left: 3px;
+          }
+          
+          #star-3 {
+            width: 12px;
+            top: 20px;
+            left: 10px;
+            animation-delay: 0.6s;
+          }
+          
+          #star-4 {
+            width: 18px;
+            top: 0px;
+            left: 18px;
+            animation-delay: 1.3s;
+          }
+          
+          @keyframes star-twinkle {
+            0% {
+              transform: scale(1);
+            }
+          
+            40% {
+              transform: scale(1.2);
+            }
+          
+            80% {
+              transform: scale(0.8);
+            }
+          
+            100% {
+              transform: scale(1);
+            }
+          }
+
+        /* Slideshow Container */
+        .slideshow-container {
+            max-width: 800px; /* Adjust the width as needed */
+            width: 90%; /* Responsive width */
+            height: 500px; /* Fixed height for the slideshow */
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            background: var(--glass-background);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Slides */
+        .mySlides {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: slideIn 1.5s ease-in-out;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the container without distortion */
+            border-radius: 25px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .mySlides:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Slide In Animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Gradient Overlay */
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+            border-radius: 25px;
+        }
+
+        /* Navigation Dots */
+        .dots {
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: rgba(255, 255, 255, 1);
+            transform: scale(1.5);
+        }
+
+        /* Overlay Text */
+        .overlay {
+            position: absolute;
+            bottom: 60px;
+            left: 30px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            animation: textFade 1.5s ease-in-out;
+        }
+
+        @keyframes textFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Theme Toggle Switch */
+        .switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="button-container">
+                <button onclick="openContactUs()">contact us</button>
+                <button onclick="openSunglass()">sun glasses</button>
+                <button onclick="openKids()">kids</button>
+                <button onclick="openWomen()">women</button>
+                <button onclick="openAlPatol()">home</button>
+            </div>
+        </nav>
+        
+<label class="switch">
+    <input id="input" type="checkbox" checked="darkTheme" />
+    <div class="slider round">
+        <div class="sun-moon">
+            <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="50"></circle>
+            </svg>
+        <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        
+        <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+        <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+        </svg>
+    </div>
+    <div class="stars">
+      <svg id="star-1" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-2" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-3" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-4" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</label>
+</header>
+    <label class="switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider"></span>
+    </label>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+        <!-- Slides -->
+        <div class="mySlides fade">
+            <img src="WhatsApp Image 2025-03-04 at 00.22.00_87571af9.jpg" alt="Image 1">
+            <div class="overlay">Image 1</div>
+        </div>
+        <div class="mySlides fade">
+            <img src="WhatsApp Image 2025-03-04 at 00.21.59_ffa460a2.jpg" alt="Image 2">
+            <div class="overlay">Image 2</div>
+        </div>
+        <div class="mySlides fade">
+            <img src="WhatsApp Image 2025-03-04 at 00.21.58_2a10353f.jpg" alt="Image 3">
+            <div class="overlay">Image 3</div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </div>
+
+    <script>
+        const toggleSwitch = document.getElementById('input'); // Use the correct id
+        const body = document.body;
+        
+
+        if (toggleSwitch.checked) {
+        body.setAttribute('data-theme', 'dark');
+    }
+        toggleSwitch.addEventListener('change', () => {
+            if (toggleSwitch.checked) {
+                body.setAttribute('data-theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+            }
+        });
+        let slideIndex = 0;
+        showSlides();
+
+        // Function to show slides
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+
+            // Hide all slides
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Increment slide index
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+
+            // Show the current slide
+            slides[slideIndex - 1].style.display = "block";
+
+            // Update active dot
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            dots[slideIndex - 1].className += " active";
+
+            // Change slide every 3 seconds
+            setTimeout(showSlides, 3000);
+        }
+
+        // Function to navigate to a specific slide
+        function currentSlide(n) {
+            slideIndex = n - 1;
+            showSlides();
+        }
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                body.setAttribute('data-theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+            }
+        });
+    </script>
+</body>
+</html>

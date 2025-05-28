@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact us</title>
+    <style>
+        :root {
+            --background-color: #f4f4f9;
+            --table-background: #ffffff;
+            --text-color: #333;
+            --button-color: #4CAF50;
+            --button-hover-color: #45a049;
+            --alert-color: red;
+        }
+  
+        [data-theme="dark"] {
+            --background-color: #1e1e2f;
+            --table-background: #2b2b3b;
+            --text-color: #000000;
+            --button-color: #6e8efb;
+            --button-hover-color: #575fcf;
+            --alert-color: #ff4d4d;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, #3f433f, #525552);
+            color: white;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 12px 18px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        header nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        header nav a:active {
+            transform: translateY(1px);
+        }
+        
+        header .button-container button {
+            padding: 1.2em 2.5em;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            color: #fff;
+            background-color: #6e8efb;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+        
+        header .button-container button:hover {
+            background-color: #5c7ce1;
+            box-shadow: 0px 15px 20px rgba(106, 126, 232, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+        
+        header .button-container button:active {
+            transform: translateY(-1px);
+        }
+        
+
+        .welcome {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 24px;
+        }
+
+        .content {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+          }
+          
+          .switch #input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #2196f3;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            z-index: 0;
+            overflow: hidden;
+          }
+          
+          .sun-moon {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: yellow;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+          }
+          
+          #input:checked + .slider {
+            background-color: black;
+          }
+          
+          #input:focus + .slider {
+            box-shadow: 0 0 1px #2196f3;
+          }
+          
+          #input:checked + .slider .sun-moon {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+            background-color: white;
+            -webkit-animation: rotate-center 0.6s ease-in-out both;
+            animation: rotate-center 0.6s ease-in-out both;
+          }
+          
+          .moon-dot {
+            opacity: 0;
+            transition: 0.4s;
+            fill: gray;
+          }
+          
+          #input:checked + .slider .sun-moon .moon-dot {
+            opacity: 1;
+          }
+          
+          .slider.round {
+            border-radius: 34px;
+          }
+          
+          .slider.round .sun-moon {
+            border-radius: 50%;
+          }
+          
+          #moon-dot-1 {
+            left: 10px;
+            top: 3px;
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            z-index: 4;
+          }
+          
+          #moon-dot-2 {
+            left: 2px;
+            top: 10px;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            z-index: 4;
+          }
+          
+          #moon-dot-3 {
+            left: 16px;
+            top: 18px;
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            z-index: 4;
+          }
+          
+          #light-ray-1 {
+            left: -8px;
+            top: -8px;
+            position: absolute;
+            width: 43px;
+            height: 43px;
+            z-index: -1;
+            fill: white;
+            opacity: 10%;
+          }
+          
+          #light-ray-2 {
+            left: -50%;
+            top: -50%;
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            z-index: -1;
+            fill: white;
+            opacity: 10%;
+          }
+          
+          #light-ray-3 {
+            left: -18px;
+            top: -18px;
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: -1;
+            fill: white;
+            opacity: 10%;
+          }
+          
+          .cloud-light {
+            position: absolute;
+            fill: #eee;
+            animation-name: cloud-move;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+          }
+          
+          .cloud-dark {
+            position: absolute;
+            fill: #ccc;
+            animation-name: cloud-move;
+            animation-duration: 6s;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+          }
+          
+          #cloud-1 {
+            left: 30px;
+            top: 15px;
+            width: 40px;
+          }
+          
+          #cloud-2 {
+            left: 44px;
+            top: 10px;
+            width: 20px;
+          }
+          
+          #cloud-3 {
+            left: 18px;
+            top: 24px;
+            width: 30px;
+          }
+          
+          #cloud-4 {
+            left: 36px;
+            top: 18px;
+            width: 40px;
+          }
+          
+          #cloud-5 {
+            left: 48px;
+            top: 14px;
+            width: 20px;
+          }
+          
+          #cloud-6 {
+            left: 22px;
+            top: 26px;
+            width: 30px;
+          }
+          
+          @keyframes cloud-move {
+            0% {
+              transform: translateX(0px);
+            }
+          
+            40% {
+              transform: translateX(4px);
+            }
+          
+            80% {
+              transform: translateX(-4px);
+            }
+          
+            100% {
+              transform: translateX(0px);
+            }
+          }
+          
+          .stars {
+            transform: translateY(-32px);
+            opacity: 0;
+            transition: 0.4s;
+          }
+          
+          .star {
+            fill: white;
+            position: absolute;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            animation-name: star-twinkle;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+          }
+          
+          #input:checked + .slider .stars {
+            -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+            transform: translateY(0);
+            opacity: 1;
+          }
+          
+          #star-1 {
+            width: 20px;
+            top: 2px;
+            left: 3px;
+            animation-delay: 0.3s;
+          }
+          
+          #star-2 {
+            width: 6px;
+            top: 16px;
+            left: 3px;
+          }
+          
+          #star-3 {
+            width: 12px;
+            top: 20px;
+            left: 10px;
+            animation-delay: 0.6s;
+          }
+          
+          #star-4 {
+            width: 18px;
+            top: 0px;
+            left: 18px;
+            animation-delay: 1.3s;
+          }
+          
+          @keyframes star-twinkle {
+            0% {
+              transform: scale(1);
+            }
+          
+            40% {
+              transform: scale(1.2);
+            }
+          
+            80% {
+              transform: scale(0.8);
+            }
+          
+            100% {
+              transform: scale(1);
+            }
+          }
+          
+
+        button {
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            color: #000;
+            background-color: #fff;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #23c483;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button-container button {
+            margin: 10px;
+        }
+          /* Card Styles */
+          .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 300px;  /* Adjust width as necessary */
+            margin: 20px auto 0 auto; /* Center the card horizontally */
+            padding: 20px;
+            background-color: #171717; /* Optional background */
+            border-radius: 18px; /* Optional border radius */
+            box-shadow: 0 4px 8px rgba(43, 42, 42, 0.1);
+            top: 50%;
+          }
+          .card span {
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            display: block;
+            font-size: 3em;
+          }
+          
+          .card .info {
+            font-weight: 50;
+            color: rgb(255, 254, 254);
+            display: block;
+            text-align: center;
+            font-size: 1em;
+            margin: 1em;
+          }
+        
+          .card:hover {
+            transform: translateY(0px);
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+          }
+        
+          .card .img {
+            width: 6rem;
+            height: 6rem;
+            background: white;
+            border-radius: 30%;
+            margin-bottom: 1.5rem;
+          }
+        
+          /* From Uiverse.io by roajuan93 */ 
+          .card {
+            width: fit-content;
+            height: fit-content;
+            background-color: rgb(62, 61, 61);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px 10px;
+            gap: 20px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+          }
+          
+          /* for all social containers*/
+          .socialContainer {
+            width: 500px;
+            height: 59px;
+            border-radius: 5px;
+            background-color: rgb(0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition-duration: 0.3s;
+          }
+          /* Tiktok*/
+          .containerTwo:hover {
+            background-color: #fd0000;
+            transition-duration: 0.3s;
+          }
+          /* Facebook*/
+          .containerThree:hover {
+            background-color: #1877f2;
+            transition-duration: 0.3s;
+          }
+          /* Whatsapp*/
+          .containerFour:hover {
+            background-color: green;
+            transition-duration: 0.3s;
+          }
+          
+          .socialContainer:active {
+            transform: scale(0.9);
+            transition-duration: 0.3s;
+          }
+          
+          .socialSvg {
+            width: 44px;
+            height: 44px;
+          }
+          .largeIcon {
+            width: 27px; /* Ancho específico solo para el icono de TikTok */
+          }
+          .socialSvg path {
+            fill: rgb(255, 255, 255);
+          }
+          
+          .socialContainer:hover .socialSvg {
+            animation: slide-in-top 0.5s both;
+          }
+          
+          @keyframes slide-in-top {
+            0% {
+              transform: translateY(-50px);
+              opacity: 0;
+            }
+          
+            100% {
+              transform: translateY(0px);
+              opacity: 1;
+            }
+          }
+          
+          .form-container {
+            width: 400px;
+            background: linear-gradient(#212121, #212121) padding-box,
+                        linear-gradient(145deg, transparent 35%,#e81cff, #40c9ff) border-box;
+            border: 3px solid transparent;
+            padding: 50px 50px;
+            font-size: 20px;
+            font-family: inherit;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+            border-radius: 18px;
+            position: absolute;
+            top: 119%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+          }
+          
+          .form-container button:active {
+            scale: 0.95;
+          }
+          
+          .form-container .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+          }
+          
+          .form-container .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+          }
+          
+          .form-container .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #717171;
+            font-weight: 600;
+            font-size: 12px;
+          }
+          
+          .form-container .form-group input {
+            width: 90%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+            background-color: transparent;
+            border: 1px solid #414141;
+          }
+          
+          .form-container .form-group textarea {
+            width: 90%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            resize: none;
+            color: #fff;
+            height: 96px;
+            border: 1px solid #414141;
+            background-color: transparent;
+            font-family: inherit;
+          }
+          
+          .form-container .form-group input::placeholder {
+            opacity: 0.5;
+          }
+          
+          .form-container .form-group input:focus {
+            outline: none;
+            border-color: #e81cff;
+          }
+          
+          .form-container .form-group textarea:focus {
+            outline: none;
+            border-color: #e81cff;
+          }
+          
+          .form-container .form-submit-btn {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            align-self: flex-start;
+            font-family: inherit;
+            color: #717171;
+            font-weight: 1000;
+            width: 50%;
+            background: #313131;
+            border: 1px solid #414141;
+            padding: 12px 16px;
+            font-size: inherit;
+            gap: 8px;
+            margin-top: 8px;
+            cursor: pointer;
+            border-radius: 6px;
+          }
+          
+          .form-container .form-submit-btn:hover {
+            background-color: #fff;
+            border-color: #fff;
+          } 
+
+            @keyframes pulse {
+                0% { transform: translate(-50%, -100%) scale(1); opacity: 0.8; }
+                50% { transform: translate(-50%, -100%) scale(1.2); opacity: 1; }
+                100% { transform: translate(-50%, -100%) scale(1); opacity: 0.8; }
+            }
+            
+            @keyframes float {
+                0% { transform: perspective(1000px) rotateX(5deg) translateY(0px); }
+                50% { transform: perspective(1000px) rotateX(5deg) translateY(-15px); }
+                100% { transform: perspective(1000px) rotateX(5deg) translateY(0px); }
+            }
+            
+            .map-wrapper:hover {
+                transform: perspective(1000px) rotateX(5deg) scale(1.02);
+                box-shadow: 0 40px 70px rgba(0,0,0,0.3);
+                animation: float 6s ease-in-out infinite;
+            }
+            
+            .map-wrapper:hover .location-pin {
+                animation: pulse 1s infinite;
+            }
+        
+            /* Button hover effect */
+            a[href="https://maps.app.goo.gl/pgxgbzc3Q7KMrcw37"]:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+                background: linear-gradient(135deg, #40c9ff, #e81cff);
+            }
+        
+        
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="button-container">
+                <button onclick="opensunglass()">sun glasses</button>
+                <button onclick="openMen()">men</button>
+                <button onclick="openKids()">kids</button>
+                <button onclick="openWomen()">women</button>
+                <button onclick="openAlPatol()">home</button>
+            </div>
+        </nav>
+        
+<label class="switch">
+    <input id="input" type="checkbox" checked="darkTheme" />
+    <div class="slider round">
+        <div class="sun-moon">
+            <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+            </svg>
+      <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+
+      <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+      <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="50"></circle>
+      </svg>
+    </div>
+    <div class="stars">
+      <svg id="star-1" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-2" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-3" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+      <svg id="star-4" class="star" viewBox="0 0 20 20">
+        <path
+          d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+</label>
+
+    </header>
+        <div class="card">
+          <div class="img"></div>
+          <span>About Me</span>
+          <p class="info">I’m Walter, a multidisciplinary designer who focuses on telling my clients’ stories visually, through enjoyable and meaningful experiences. I specialize in responsive websites and functional user interfaces.</p> 
+          <div class="card">
+            <a href="#" class="socialContainer containerTwo">
+            <svg
+              class="socialSvg youtubeSvg largeIcon"
+              viewBox="0 0 48 48"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <title>Facebook</title>
+              <g
+                id="Icon/Social/youtube-white"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <path
+                  d="M24,4 C34.4934102,4 40.7065396,4.79592089 42.6851988,5.59485292 C43.8446105,6.03051853 44.7699517,6.9558597 45.2056173,8.11527136 C46.0045493,10.0939306 46.8004702,16.30706 46.8004702,24 C46.8004702,31.69294 46.0045493,37.9060694 45.2056173,39.8847286 C44.7699517,41.0441403 43.8446105,41.9694815 42.6851988,42.4051471 C40.7065396,43.2040791 34.4934102,44 24,44 C13.5065898,44 7.29346044,43.2040791 5.31480119,42.4051471 C4.15538953,41.9694815 3.2300483,41.0441403 2.79438267,39.8847286 C1.99545065,37.9060694 1.19952979,31.69294 1.19952979,24 C1.19952979,16.30706 1.99545065,10.0939306 2.79438267,8.11527136 C3.2300483,6.9558597 4.15538953,6.03051853 5.31480119,5.59485292 C7.29346044,4.79592089 13.5065898,4 24,4 Z M19.5,16.5 L19.5,31.5 L32,24 L19.5,16.5 Z"
+                  id="Fill-1"
+                  fill="#FFFFFF"
+                ></path>
+              </g>
+            </svg>
+          </a>
+          
+          
+            <a href="https://www.facebook.com/profile.php?id=100063605396113&mibextid=ZbWKwL" class="socialContainer containerThree">
+              <div>
+                <svg
+                  class="socialSvg tiktokSvg largeIcon"
+                  width="44px"
+                  height="44px"
+                  viewBox="0 0 45 35"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <title>Whatsapp</title>
+                  <g
+                    id="Icon/Social/facebook-black"
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                  >
+                    <path
+                      d="M30.0793333,40 L30.0793333,27.608 L34.239,27.608 L34.8616667,22.7783333 L30.0793333,22.7783333 L30.0793333,19.695 C30.0793333,18.2966667 30.4676667,17.344 32.4726667,17.344 L35.0303333,17.3426667 L35.0303333,13.0233333 C34.5876667,12.9646667 33.0696667,12.833 31.3036667,12.833 C27.6163333,12.833 25.0923333,15.0836667 25.0923333,19.2166667 L25.0923333,22.7783333 L20.922,22.7783333 L20.922,27.608 L25.0923333,27.608 L25.0923333,40 L30.0793333,40 Z M9.766,40 C8.79033333,40 8,39.209 8,38.234 L8,9.766 C8,8.79033333 8.79033333,8 9.766,8 L38.2336667,8 C39.209,8 40,8.79033333 40,9.766 L40,38.234 C40,39.209 39.209,40 38.2336667,40 L9.766,40 Z"
+                      id="Shape"
+                      fill="#FFFFFF"
+                    ></path>
+                  </g>
+                </svg>
+              </div>
+            </a>
+          
+            <a href="https://wa.me/201220027027" class="socialContainer containerFour">
+              <svg class="socialSvg whatsappSvg" viewBox="0 0 16 16">
+                <path
+                  d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          
+        </div>
+        <div class="form-container">
+          <form action="https://formsubmit.co/philohany1682007@gmail.com" method="POST" />
+            <div class="form-group">
+              <label for="email">Company Email</label>
+              <input type="email" id="email" name="email" placeholder="email"required>
+            </div>
+            <div class="form-group">
+              <label for="textarea">How Can We Help You?</label>
+              <textarea name="textarea" id="textarea" rows="10" cols="50" required=""></textarea>
+            </div>
+            <button class="form-submit-btn" type="submit">Submit</button>
+          </form>
+        </div>
+              
+        <div class="map-section" style="margin: 80px auto; max-width: 1200px; padding: 0 20px; text-align: center;">
+          <h2 style="color: var(--text-color); margin-bottom: 40px; font-size: 2.5rem; font-weight: 700;">Our Location</h2>
+          
+          <div class="map-wrapper" style="
+              position: relative;
+              border-radius: 20px;
+              overflow: hidden;
+              box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+              transform: perspective(1000px) rotateX(5deg);
+              transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              height: 500px;
+              background: linear-gradient(145deg, #f3f3f3, #e0e0e0);
+              border: 3px solid transparent;
+              background-clip: padding-box;
+              margin-bottom: 30px;
+          ">
+              <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.789012345678!2d-122.12345678901234!3d37.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDA3JzI0LjQiTiAxMjLCsDA3JzI0LjQiVw!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                  width="100%" 
+                  height="100%" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+              
+              <div class="map-overlay" style="
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: linear-gradient(135deg, rgba(64,201,255,0.1) 0%, rgba(232,28,255,0.1) 100%);
+                  pointer-events: none;
+              "></div>
+              
+              <div class="location-pin" style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -100%);
+                  width: 40px;
+                  height: 40px;
+                  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23e81cff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>') no-repeat center;
+                  filter: drop-shadow(0 0 15px rgba(232, 28, 255, 0.7));
+                  animation: pulse 2s infinite;
+                  z-index: 10;
+              "></div>
+          </div>
+      
+          <!-- Open in Google Maps Button -->
+          <a href="https://maps.app.goo.gl/pgxgbzc3Q7KMrcw37" target="_blank" style="
+              display: inline-block;
+              padding: 15px 30px;
+              background: linear-gradient(135deg, #e81cff, #40c9ff);
+              color: white;
+              text-decoration: none;
+              font-weight: bold;
+              border-radius: 50px;
+              box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+              transition: all 0.3s ease;
+              font-size: 1.1rem;
+              margin-top: 20px;
+          ">
+              Open in Google Maps
+              <svg style="margin-left: 8px; vertical-align: middle;" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 6H6V4H10V6ZM18 4H14V6H18V4ZM18 16V14H20V16H18ZM16 6H14V8H16V6ZM8 8H10V6H8V8ZM4 16H6V14H4V16ZM8 16V14H6V16H8ZM18 8V10H20V8H18ZM16 16H18V14H16V16ZM10 16H8V18H10V16ZM4 8H6V10H4V8ZM8 10H10V8H8V10ZM14 16H16V14H14V16ZM14 8H12V10H14V8ZM10 10H12V8H10V10ZM14 10H16V8H14V10ZM6 12H4V14H6V12ZM12 10V12H14V10H12ZM12 16V14H10V16H12ZM16 12V10H14V12H16Z" fill="white"/>
+              </svg>
+          </a>
+      </div>
+
+    <script>
+        const toggleSwitch = document.getElementById('input'); // Use the correct id
+        const body = document.body;
+        
+
+        if (toggleSwitch.checked) {
+          body.setAttribute('data-theme', 'dark');
+      }
+        toggleSwitch.addEventListener('change', () => {
+            if (toggleSwitch.checked) {
+                body.setAttribute('data-theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+            }
+        });
+        function openAlPatol() {
+            window.location.href = "ALPatol.html";
+        } 
+        function opensunglass() {
+          window.location.href = "sunglass.html";
+      } 
+        function openMen() {
+            window.location.href = "men.html";
+        }
+        
+        function openWomen() {
+            window.location.href = "women.html";
+        }
+        
+        function openKids() {
+            window.location.href = "kids.html";
+        }
+        
+        const form = document.querySelector('.form'); 
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); 
+    
+            
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('textarea').value;
+    
+            
+            emailjs.init("YOUR_EMAILJS_USER_ID");
+    
+            
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                email: email,
+                message: message,
+                to_email: "philohany1682007@gmail.com",
+            }).then(
+                function (response) {
+                    alert("Thank you! Your message has been sent successfully.");
+                    form.reset(); 
+                },
+                function (error) {
+                    alert("Sorry, something went wrong. Please try again later.");
+                }
+            );
+        });  
+        
+          // Update with your actual embed URL
+          document.addEventListener('DOMContentLoaded', function() {
+              const iframe = document.querySelector('.map-wrapper iframe');
+              iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.789012345678!2d-122.12345678901234!3d37.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDA3JzI0LjQiTiAxMjLCsDA3JzI0LjQiVw!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus";
+          });
+           
+    </script>
+</body>
+</html>
